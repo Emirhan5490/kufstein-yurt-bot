@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 URL = "https://www.hok.ac.at/en/service/international-student-residence"
-SEMESTER_KEYWORD = "WINTER"
+SEMESTER_KEYWORD = "SUMMER"
 
 CHECKS_PER_RUN = 5
 CHECK_INTERVAL_SECONDS = 60
