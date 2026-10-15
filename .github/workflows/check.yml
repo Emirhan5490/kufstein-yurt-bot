@@ -4,9 +4,14 @@ on:
   schedule:
     - cron: "3-58/5 * * * *"
   workflow_dispatch:
+    inputs:
+      source:
+        description: "Elle test icin degistirme (manual)"
+        default: "manual"
+        required: false
 
 concurrency:
-  group: isr-checker
+  group: isr-${{ inputs.source == 'manual' && 'manual' || 'auto' }}
   cancel-in-progress: false
 
 jobs:
@@ -30,4 +35,4 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+          MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.source == 'manual' }}
